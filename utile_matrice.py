@@ -30,7 +30,7 @@ def citire_f(fisier,tip):
     return(n,m,M)
 
 def afisare(M):
-    nr=1
+    nr=0
     nr=max([len(str((el))) for i in M for el in i if nr<len(str((el)))])#gaseste lungimea maxima a elementelor
     for i in M:
         for el in i:
