@@ -1,3 +1,4 @@
+# Realizat de/Produced by Casiu George Valentin
 def citire(tip):
     n=int(input("n="))
     m=int(input("m="))
