@@ -1,0 +1,66 @@
+# Realizat de/Produced by Casiu George Valentin
+"""
+a field is given in the form of matrix M with n lines and m columns. The element M[i][j] holds the altitude of the square of coordinates i and j.
+Must display the coordinates of the "peak squares"  (a square is a peak if whole his neigbors have a strictly lower altitude)
+Un teren este dat sub forma unui tablou m cu n linii şi m coloane. Elementul M[i][j] reţine altitudinea pǎtrǎţelului de coordonate i şi j.
+Sǎ se afişeze coordonatele "pǎtrǎţelelor vârf" (un pǎtrǎţel este vârf dacǎ toţi vecinii sǎi au o altitudine strict mai micǎ)
+Exemplu:
+9 1 1 1
+1 1 9 1
+9 1 1 1
+1 1 9 1
+The element is/Elementul este:M[ 0 ][ 0 ]= 9 is peak/este varf
+The element is/Elementul este:M[ 1 ][ 2 ]= 9 is peak/este varf
+The element is/Elementul este:M[ 2 ][ 0 ]= 9 is peak/este varf
+The element is/Elementul este:M[ 3 ][ 2 ]= 9 is peak/este varf
+"""
+
+def citirenat(text):# natural number reading/citire numar natural
+    n=''
+    while not(n.isdecimal()): # if n is not decimal/daca n nu e zecimal
+        n = input(text)
+        n = n.strip(' +')# remove spaces and '+' from the beginning and end of number/elimina spatiile libere si '+' de la inceputul si sfarsitul numarului
+    return int(n)
+
+def citiremat(tip):
+    m=citirenat("Enter the number of lines/Introduceti numarul de linii:")
+    n=citirenat("Enter the number of columns/Introduceti numarul de coloane:")
+    M=[list([0 for j in range(n)]) for i in range(m)]
+    for i in range(m):
+        for j in range(n):
+            if tip=="int":
+                M[i][j]=citirenat("M["+str(i)+","+str(j)+"]=")
+            elif tip=="float":
+                M[i][j]=float(input("M["+str(i)+","+str(j)+"]="))
+            else:
+                M[i][j]=input("M["+str(i)+","+str(j)+"]=")
+    return(n,m,M)
+
+def afisaremat(M):
+    nr=0
+    nr=max([len(str((el))) for i in M for el in i if nr<len(str((el)))])#gaseste lungimea maxima a elementelor
+    for i in M:
+        for el in i:
+            print(el,end=" "*(nr+1-len(str(el))))#afiseaza elementul cu spatii dupa el
+        print()
+
+# Programul principal/The main program
+n,m,M=citiremat("int")
+afisaremat(M)
+for i in range(n):
+    for j in range (m):
+        rez=True
+        c=i-1
+        d=i+2
+        e=j-1
+        f=j+2
+        if i==0: c=0
+        if i==n-1: d=n
+        if j==0: e=0
+        if j==m-1: f=m
+        for a in range(c,d):
+            for b in range (e,f):
+                if M[i][j]<M[a][b]:
+                    rez=False
+        if rez:
+            print("The element is/Elementul este:M[", i, "][", j, "]=", M[i][j],"is peak/este varf")
