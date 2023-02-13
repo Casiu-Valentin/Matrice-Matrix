@@ -10,7 +10,8 @@ um.afisare(M)
 #interschimbarea liniilor/intrechange of lines
 x=int(input("Introduceti x="))
 y=int(input("Introduceti y="))
-M[x-1],M[y-1]=M[y-1],M[x-1]
+for j in range(n):
+    M[x-1][j],M[y-1][j]=M[y-1][j],M[x-1][j]
 um.afisare(M)
 um.scrie_f("matrice.out",M)
 """
@@ -19,7 +20,7 @@ um.scrie_f("matrice.out",M)
 #interschimbarea coloanelor/interchange of columns
 x=int(input("Introduceti x="))
 y=int(input("Introduceti y="))
-for i in range(n):
+for i in range(m):
     M[i][x-1],M[i][y-1]=M[i][y-1],M[i][x-1]
 um.afisare(M)
 um.scrie_f("matrice.out",M)
