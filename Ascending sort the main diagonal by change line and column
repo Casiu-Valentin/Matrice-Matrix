@@ -1,0 +1,59 @@
+# Realizat de/Produced by Casiu George Valentin
+"""
+Swap the rows and columns of a matrix with n rows and n columns so that the elements on the main diagonal are sorted in ascending order
+Interschimbaţi liniile şi coloanele unei matrice cu n linii şi n coloane astfel încât elementele de pe diagonala principalǎ sǎ fie sortate crescǎtor
+Matrix is/Matricea este:
+3 4 5
+6 2 7
+8 9 1
+Sorted matrix is/Matricea sortata este:
+1 9 8
+7 2 6
+5 4 3
+"""
+
+def citirenat(text):# natural number reading/citire numar natural
+    n=''
+    while not(n.isdecimal()): # if n is not decimal/daca n nu e zecimal
+        n = input(text)
+        n = n.strip(' +')# remove spaces and '+' from the beginning and end of number/elimina spatiile libere si '+' de la inceputul si sfarsitul numarului
+    return int(n)
+
+def citiremat(tip):
+    m=n=citirenat("Enter the number of lines and columns/Introduceti numarul de linii si coloane:")
+    M=[list([0 for j in range(n)]) for i in range(m)]
+    for i in range(m):
+        for j in range(n):
+            if tip=="int":
+                M[i][j]=citirenat("M["+str(i)+","+str(j)+"]=")
+            elif tip=="float":
+                M[i][j]=float(input("M["+str(i)+","+str(j)+"]="))
+            else:
+                M[i][j]=input("M["+str(i)+","+str(j)+"]=")
+    return(n,m,M)
+
+def afisare(M):
+    nr=0
+    nr=max([len(str((el))) for i in M for el in i if nr<len(str((el)))])#gaseste lungimea maxima a elementelor
+    for i in M:
+        for el in i:
+            print(el,end=" "*(nr+1-len(str(el))))#afiseaza elementul cu spatii dupa el
+        print()
+
+# Programul principal/The main program
+n,m,M=citiremat("int")
+print("Matrix is/Matricea este:")
+afisare(M)
+rez=True
+while rez:
+    rez=False
+    for i in range (n-1):
+        if M[i][i]>M[i+1][i+1]:
+            for j in range (m):#we change the line/interschimbam liniile i cu i+1
+                M[i][j],M[i+1][j]=M[i+1][j],M[i][j]
+            for j in range(n):#we change the column/interschimbam coloanele i cu i+1
+                    M[j][i], M[j][i + 1] = M[j][i + 1], M[j][i]
+            rez = True
+
+print("Sorted matrix is/Matricea sortata este:")
+afisare(M)
