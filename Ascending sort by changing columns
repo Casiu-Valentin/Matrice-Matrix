@@ -1,0 +1,48 @@
+# Realizat de/Produced by Casiu George Valentin
+"""
+Interchange the columns of a matrix with m lines and n columns so that in line k the elements are in ascending order.
+Interschimbaţi coloanele unei matrice cu m linii şi n coloane astfel încât în linia k elementele sǎ fie în ordine crescǎtoare.
+"""
+
+def citirenat(text):# natural number reading/citire numar natural
+    n=''
+    while not(n.isdecimal()): # if n is not decimal/daca n nu e zecimal
+        n = input(text)
+        n = n.strip(' +')# remove spaces and '+' from the beginning and end of number/elimina spatiile libere si '+' de la inceputul si sfarsitul numarului
+    return int(n)
+
+def citiremat(tip):
+    m=citirenat("Enter the number of lines/Introduceti numarul de linii:")
+    n=citirenat("Enter the number of columns/Introduceti numarul de coloane:")
+    M=[list([0 for j in range(n)]) for i in range(m)]
+    for i in range(m):
+        for j in range(n):
+            if tip=="int":
+                M[i][j]=citirenat("M["+str(i)+","+str(j)+"]=")
+            elif tip=="float":
+                M[i][j]=float(input("M["+str(i)+","+str(j)+"]="))
+            else:
+                M[i][j]=input("M["+str(i)+","+str(j)+"]=")
+    return(n,m,M)
+
+def afisare(M):
+    nr=0
+    nr=max([len(str((el))) for i in M for el in i if nr<len(str((el)))])#gaseste lungimea maxima a elementelor
+    for i in M:
+        for el in i:
+            print(el,end=" "*(nr+1-len(str(el))))#afiseaza elementul cu spatii dupa el
+        print()
+
+# Programul principal/The main program
+n,m,M=citiremat("int")
+afisare(M)
+k=citirenat("Enter the line to be sorted/Introduceti linia care trebuie sortata:")-1
+rez=True
+while rez:
+    rez=False
+    for j in range (n-1):
+        if M[k][j]>M[k][j+1]:
+            for i in range (m):
+                M[i][j],M[i][j+1]=M[i][j+1],M[i][j]
+            rez = True
+afisare(M)
