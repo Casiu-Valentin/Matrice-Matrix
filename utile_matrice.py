@@ -1,24 +1,24 @@
 # Realizat de/Produced by Casiu George Valentin
 def citire(tip):
-    n=int(input("n="))
     m=int(input("m="))
-    M=[list([0 for j in range(m)]) for i in range(n)]
-    for i in range(n):
-        for j in range(m):
+    n=int(input("n="))
+    M=[list([0 for j in range(n)]) for i in range(m)]
+    for i in range(m):
+        for j in range(n):
             if tip=="int":
                 M[i][j]=int(input("M["+str(i)+","+str(j)+"]="))
             elif tip=="float":
                 M[i][j]=float(input("M["+str(i)+","+str(j)+"]="))
             else:
                 M[i][j]=input("M["+str(i)+","+str(j)+"]=")
-    return(n,m,M)
+    return(m,n,M)
 
 def citire_f(fisier,tip):
     with open(fisier, "r") as f:
-        n=int(f.readline())
         m=int(f.readline())
-        M=[list([0 for j in range(m)]) for i in range(n)]
-        for i in range(n):
+        n=int(f.readline())
+        M=[list([0 for j in range(n)]) for i in range(m)]
+        for i in range(m):
             linie=f.readline() #sau se poate folosi/or you can use directli: linie=f.readline().replace("\n"," ").split()
             linie=linie.replace("\n"," ")
             linie=linie.split()
