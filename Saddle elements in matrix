@@ -1,0 +1,84 @@
+# Realizat de/Produced by Casiu George Valentin
+"""
+Determine the saddle element of matrix with n lines and m columns(minumum element per line and maximum per column or maximum per line and mimimum per column).
+Indication.Careful! The maxima or minima on lines or column may not be unique. If we conider only one of this value, we might lose solutions.
+Determinaţi elementele şa ale unei matrice cu n linii şi m coloane(elemente minime pe linie şi maxime pe coloanǎ sau maxime pe linie şi minime pe coloanǎ).
+Indicaţie. Atenţie! Maximele sau minimele pe linii sau coloane pot sǎ nu fie unice. Dacǎ vom considera numai o valoare dintre acestea, s-ar putea sǎ pierdem soluţii.
+Matrix is/Matricea este:
+1  4  3  4
+5  6  7  8
+9  10 11 12
+Saddle element is/Elementul sa este: 4 beaucause is maxim on line/deoarece este maxim pe linia: 0 and minim on column/si minim pe coloana: 1
+Saddle element is/Elementul sa este: 4 beaucause is maxim on line/deoarece este maxim pe linia: 0 and minim on column/si minim pe coloana: 3
+Saddle element is/Elementul sa este: 9 beaucause is minim on line/deoarece este minim pe linia: 2 and maxim on column/si maxim pe coloana: 0
+"""
+
+def citirenat(text):# natural number reading/citire numar natural
+    n=''
+    while not(n.isdecimal()): # if n is not decimal/daca n nu e zecimal
+        n = input(text)
+        n = n.strip(' +')# remove spaces and '+' from the beginning and end of number/elimina spatiile libere si '+' de la inceputul si sfarsitul numarului
+    return int(n)
+
+def citiremat(tip):
+    m=citirenat("Enter the number of lines/Introduceti numarul de linii:")
+    n=citirenat("Enter the number of columns/Introduceti numarul de coloane:")
+    M=[list([0 for j in range(n)]) for i in range(m)]
+    for i in range(m):
+        for j in range(n):
+            if tip=="int":
+                M[i][j]=citirenat("M["+str(i)+","+str(j)+"]=")
+            elif tip=="float":
+                M[i][j]=float(input("M["+str(i)+","+str(j)+"]="))
+            else:
+                M[i][j]=input("M["+str(i)+","+str(j)+"]=")
+    return(n,m,M)
+
+def afisaremat(M):
+    nr=0
+    nr=max([len(str((el))) for i in M for el in i if nr<len(str((el)))])#gaseste lungimea maxima a elementelor
+    for i in M:
+        for el in i:
+            print(el,end=" "*(nr+1-len(str(el))))#afiseaza elementul cu spatii dupa el
+        print()
+
+def maxc(M, c):
+    max = M[0][c]
+    for i in range(m):
+        if max < M[i][c]:
+            max = M[i][c]
+    return (max)
+
+def minc(M, c):
+    min = M[0][c]
+    for i in range(m):
+        if min > M[i][c]:
+            min = M[i][c]
+    return (min)
+
+def maxl(M,l):
+    max=M[l][0]
+    for j in range(n):
+        if max<M[l][j]:
+            max=M[l][j]
+    return (max)
+
+def minl(M,l):
+    min=M[l][0]
+    for j in range(n):
+        if min>M[l][j]:
+            min=M[l][j]
+    return (min)
+
+# Programul principal/The main program
+#n,m,M=citiremat("int")
+print("Matrix is/Matricea este:")
+m=3;n=4;M=[[1, 4, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]]
+afisaremat(M)
+
+for i in range(m):
+    for j in range(n):
+        if minl(M,i)==maxc(M,j):
+            print("Saddle element is/Elementul sa este:",M[i][j],"beaucause is minim on line/deoarece este minim pe linia:", i, "and maxim on column/si maxim pe coloana:",j)
+        if maxl(M,i)==minc(M,j):
+            print("Saddle element is/Elementul sa este:",M[i][j],"beaucause is maxim on line/deoarece este maxim pe linia:", i, "and minim on column/si minim pe coloana:",j)
